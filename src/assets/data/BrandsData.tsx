@@ -14,7 +14,6 @@ const brandsData: Brand[] = [
   {
     storeName: 'Adelante Steak House',
     location: 'Bahria Town',
-    //C:/Users/Muhammad Saad/Desktop/TypeScript/JazzDiscountBazaar/src/assets/images/adelanteSteakHouseLogo.jpeg
     logoImage: require('C:/Users/Muhammad Saad/Desktop/TypeScript/JazzDiscountBazaar/src/assets/images/adelanteSteakHouseLogo.jpeg'),
     storeImage: require('C:/Users/Muhammad Saad/Desktop/TypeScript/JazzDiscountBazaar/src/assets/images/adelanteSteakHouseFood.jpeg'),
     price: '850',

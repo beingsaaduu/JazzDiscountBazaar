@@ -9,13 +9,12 @@ import { DetailsScreenProps } from '../../App';
 interface ItemType {
   storeName: string;
   location: string;
-  logoImage: ImageSourcePropType;
-  storeImage: ImageSourcePropType;
+  logoImage: ImageSourcePropType | null;
+  storeImage: ImageSourcePropType | null;
   specialOffer: string;
   validityDate: string;
   price: string;
 }
-
 
 const ProductDetail = ({ route, navigation }: DetailsScreenProps): JSX.Element => {
   const [selectedItem, setSelectedItem] = useState<ItemType | undefined>(undefined);
@@ -36,31 +35,37 @@ const ProductDetail = ({ route, navigation }: DetailsScreenProps): JSX.Element =
     <View>
       {selectedItem && (
         <>
-          <ImageBackground source={selectedItem.storeImage ? selectedItem.storeImage : null} style ={styles.backgroundImage} >
-            <TouchableOpacity style = {styles.backButton} onPress={() => navigation.goBack()}>
-            <Ionicons name="chevron-back-outline" size={30} color="black" />
-            </TouchableOpacity>
-            <Image source={selectedItem.logoImage ? selectedItem.logoImage : null} style = {styles.logoImage}></Image>
-          </ImageBackground>
-          <View style = {styles.textContainer}>
-            <Text style = {styles.brandHeading}>{selectedItem.storeName}</Text>
-            <Text style = {styles.locationSubHeading}>{selectedItem.location}</Text>
-            <View style = {styles.detailsCard}>
-              <View style = {{borderRadius: 10, height:110, flexDirection: 'row', backgroundColor: '#FFED69'}}>
-                <Image source={selectedItem.logoImage ? selectedItem.logoImage : null} style = {styles.subLogo}></Image>
+          {selectedItem.storeImage && (
+            <ImageBackground source={selectedItem.storeImage} style={styles.backgroundImage}>
+              <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                <Ionicons name="chevron-back-outline" size={30} color="black" />
+              </TouchableOpacity>
+              {selectedItem.logoImage && (
+                <Image source={selectedItem.logoImage} style={styles.logoImage} />
+              )}
+            </ImageBackground>
+          )}
+          <View style={styles.textContainer}>
+            <Text style={styles.brandHeading}>{selectedItem.storeName}</Text>
+            <Text style={styles.locationSubHeading}>{selectedItem.location}</Text>
+            <View style={styles.detailsCard}>
+              <View style={{ borderRadius: 10, height: 110, flexDirection: 'row', backgroundColor: '#FFED69' }}>
+                {selectedItem.logoImage && (
+                  <Image source={selectedItem.logoImage} style={styles.subLogo} />
+                )}
                 <Text style={styles.dealDescription}>{selectedItem.specialOffer}</Text>
               </View>
-              <View style={{flexDirection: 'row'}}>
-                <View style = {{width: 180, height: 90, marginLeft: 20, justifyContent: 'center'}}>
-                  <Text style = {{color: 'black', fontSize: 16}}>Deal Validity:</Text>
-                  <Text style = {{color: 'red', fontSize: 16}}>{selectedItem.validityDate}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={{ width: 180, height: 90, marginLeft: 20, justifyContent: 'center' }}>
+                  <Text style={{ color: 'black', fontSize: 16 }}>Deal Validity:</Text>
+                  <Text style={{ color: 'red', fontSize: 16 }}>{selectedItem.validityDate}</Text>
                 </View>
-                <View style = {{marginTop: 15}}>
-                  <TouchableOpacity style = {{backgroundColor: '#FACB1D', borderRadius: 15, height: 30, width: 120, marginBottom: 10, justifyContent: 'center'}}>
-                    <Text style = {{fontSize: 15, color: 'black', textAlign: 'center'}}>Redeem Via PIN</Text>
+                <View style={{ marginTop: 15 }}>
+                  <TouchableOpacity style={{ backgroundColor: '#FACB1D', borderRadius: 15, height: 30, width: 120, marginBottom: 10, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 15, color: 'black', textAlign: 'center' }}>Redeem Via PIN</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style = {{backgroundColor: '#FACB1D', borderRadius: 15, height: 30, width: 120, justifyContent: 'center'}}>
-                    <Text style = {{fontSize: 15, color: 'black', textAlign: 'center'}}>Redeem Via QR</Text>
+                  <TouchableOpacity style={{ backgroundColor: '#FACB1D', borderRadius: 15, height: 30, width: 120, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 15, color: 'black', textAlign: 'center' }}>Redeem Via QR</Text>
                   </TouchableOpacity>
                 </View>
               </View>
