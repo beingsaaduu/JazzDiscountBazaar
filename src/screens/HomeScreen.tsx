@@ -3,7 +3,7 @@ import HeaderBar from '../components/HeaderBar'
 import FeaturedBrands from '../components/FeaturedBrands';
 import ProductCard from '../components/ProductCard';
 import brandsData from '../assets/data/BrandsData';
-import { ProfileScreenProps } from '../../App';
+import { HomeScreenProps, SearchScreenProps } from '../../App';
 import {
   Text,
   View,
@@ -25,59 +25,61 @@ type productItem = {
   price: string;
 }
 
-const HomeScreen = ({navigation}: ProfileScreenProps): JSX.Element => {
+
+const HomeScreen = ({ navigation }: SearchScreenProps): JSX.Element => {
+  
   const handleProductDetailsPress = (item: productItem): void => {
     const storeName = item.storeName;
-    navigation.navigate('Details', {storeName: storeName,});
+    navigation.navigate('Details', { storeName: storeName, });
   };
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
-    <HeaderBar navigation={navigation} />
-    <ScrollView style={styles.mainContainer}>
-      <Text style={styles.subheading}>Featured Brands</Text>
-      <View>
-        <FlatList
-          horizontal
-          data={brandsData}
-          renderItem={({ item }) => (
-            <FeaturedBrands name={item.storeName} src={item.logoImage} />
-          )}
+      <HeaderBar navigation={navigation} />
+      <ScrollView style={styles.mainContainer}>
+        <Text style={styles.subheading}>Featured Brands</Text>
+        <View>
+          <FlatList
+            horizontal
+            data={brandsData}
+            renderItem={({ item }) => (
+              <FeaturedBrands name={item.storeName} src={item.logoImage} />
+            )}
+          />
+        </View>
+        <Image
+          source={require('../assets/images/loginPromo.jpg')}
+          style={styles.loginPromo}
         />
-      </View>
-      <Image
-        source={require('../assets/images/loginPromo.jpg')}
-        style={styles.loginPromo}
-      />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 20,
-          marginBottom: 15,
-        }}>
-        <Text style={{ fontSize: 18, color: 'black' }}>Food Deals</Text>
-        <Text style={{ fontSize: 18, color: 'black' }}>Online Stores</Text>
-        <Text style={{ fontSize: 18, color: 'black' }}>Life Style</Text>
-      </View>
-      <View>
-        <FlatList
-          data={brandsData}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleProductDetailsPress(item)}>
-              <ProductCard
-                imageBackground={item.storeImage}
-                brandName={item.storeName}
-                logo={item.logoImage}
-                validityDate={item.validityDate}
-                price={item.price}
-                dealDescription={item.specialOffer}
-              />
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-    </ScrollView>
-  </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 20,
+            marginBottom: 15,
+          }}>
+          <Text style={{ fontSize: 18, color: 'black' }}>Food Deals</Text>
+          <Text style={{ fontSize: 18, color: 'black' }}>Online Stores</Text>
+          <Text style={{ fontSize: 18, color: 'black' }}>Life Style</Text>
+        </View>
+        <View>
+          <FlatList
+            data={brandsData}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => handleProductDetailsPress(item)}>
+                <ProductCard
+                  imageBackground={item.storeImage}
+                  brandName={item.storeName}
+                  logo={item.logoImage}
+                  validityDate={item.validityDate}
+                  price={item.price}
+                  dealDescription={item.specialOffer}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 

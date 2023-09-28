@@ -10,6 +10,8 @@ import type { CompositeScreenProps } from '@react-navigation/native';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { StackScreenProps } from '@react-navigation/stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 // Screens
 import HomeScreen from './src/screens/HomeScreen'
@@ -34,11 +36,13 @@ export type StackParamsList = {
   Details: { storeName: string }
 }
 
-export type SearchScreenProps = NativeStackScreenProps<StackParamsList, 'Search'>;
+export type SearchScreenProps = {
+  navigation: NativeStackNavigationProp<StackParamsList, 'Search'>;
+};
 
 export type DetailsScreenProps = NativeStackScreenProps<StackParamsList, 'Details'>;
 
-export type ProfileScreenProps = CompositeScreenProps<
+export type HomeScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamsList, 'Home'>,
   StackScreenProps<StackParamsList>
 >;

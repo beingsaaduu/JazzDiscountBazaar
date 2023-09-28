@@ -3,7 +3,7 @@ import HeaderBar from '../components/HeaderBar';
 import { View, StyleSheet, FlatList, TouchableOpacity, ScrollView, ImageSourcePropType } from 'react-native'
 import ProductCard from '../components/ProductCard';
 import brandsData from '../assets/data/BrandsData';
-import { FoodScreenProps } from '../../App';
+import { FoodScreenProps, SearchScreenProps } from '../../App';
 
 type productItem = {
   storeName: string;
@@ -15,7 +15,7 @@ type productItem = {
   price: string;
 }
 
-const FoodScreen = ({navigation}: FoodScreenProps):JSX.Element => {
+const FoodScreen = ({navigation}: SearchScreenProps):JSX.Element => {
   const handleProductDetailsPress = (item: productItem): void => {
     const storeName = item.storeName;
     navigation.navigate('Details', {storeName: storeName,});

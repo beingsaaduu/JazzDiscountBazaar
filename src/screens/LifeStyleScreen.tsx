@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, ScrollView, TouchableOpacity, ImageSourcePr
 import ProductCard from '../components/ProductCard';
 import HeaderBar from '../components/HeaderBar';
 import lifestyleData from '../assets/data/LifestyleData';
-import {LifestyleScreenProps} from '../../App';
+import {SearchScreenProps} from '../../App';
 
 type productItem = {
   storeName: string;
@@ -15,7 +15,7 @@ type productItem = {
   price: string;
 }
 
-function LifeStyleScreen({navigation}: LifestyleScreenProps): JSX.Element {
+function LifeStyleScreen({navigation}: SearchScreenProps): JSX.Element {
   const handleProductDetailsPress = (item: productItem) => {
     const storeName = item.storeName;
     navigation.navigate('Details', {storeName: storeName,});
