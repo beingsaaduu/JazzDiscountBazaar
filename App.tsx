@@ -3,6 +3,7 @@ import { Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { CityContext, CityProvider } from './CityContext'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import type { CompositeScreenProps } from '@react-navigation/native';
@@ -141,13 +142,15 @@ const BottomTabNavigation = (): JSX.Element => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="BottomTabs" component={BottomTabNavigation} />
-        <Stack.Screen name="Search" component={SearchScreen} />
-        <Stack.Screen name="Details" component={ProductDetail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CityProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="BottomTabs" component={BottomTabNavigation} />
+          <Stack.Screen name="Search" component={SearchScreen} />
+          <Stack.Screen name="Details" component={ProductDetail} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CityProvider>
   )
 }
 
